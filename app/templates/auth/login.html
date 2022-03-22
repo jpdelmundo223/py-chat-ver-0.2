@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}
+    {% if title %}
+        {{ title }}
+    {% else %}
+        Login
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <section class="login-section p-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="text-center">
+                    <img src="{{ url_for('static', filename='./images/icons-hero.png') }}" width="500px" height="auto" alt="" id="login-large-icon">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <form class="form needs-validation" method="post" id="login-form">
+                        {{ form.csrf_token }}
+                        <h4>Login</h4>
+                        <div class="form-group mt-3">
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="bi-person-fill"></i>
+                                </span>
+                                {{ form.username(class="form-control form-control-sm", id="username", placeholder="Username") }}
+                                <!-- <div class="invalid-feedback" id="username-form-validation" style="display: none;">
+                                    {% for key, value in form.username.errors %}
+                                        {{ value }}
+                                    {% endfor %}
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <i class="bi-key-fill"></i>
+                                </span>
+                                {{ form.password(class="form-control form-control-sm", id="password", placeholder="Password") }}
+                                <!-- <div class="invalid-feedback" id="password-form-validation" style="display: none;">
+                                    Password cannot be empty
+                                </div> -->
+                            </div>
+                                <a href="#" class="link" style="float: right; font-size: 15px;">Forgot Password</a>
+                        </div>
+                        <div class="form-group mt-3">
+                            {{ form.remember_me(class="form-check-input") }}
+                            {{ form.remember_me.label(class="form-check-label", for="remember_me") }}
+                        </div>
+                        <div class="form-group mt-3">
+                            {{ form.submit(class="btn btn-success") }}
+                        </div>
+                        <div class="form-group mt-3">
+                            <p class="text-muted" style="font-size: 13px;">Doesn't have an account? <a href="{{ url_for('auth.register') }}" class="link">Register</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

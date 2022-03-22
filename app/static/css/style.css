@@ -1,0 +1,61 @@
+.navbar {
+  box-shadow: 0px 2px 10px 0px #888888;
+}
+
+.container-fluid {
+  max-width: 90%;
+}
+
+.btn-success {
+  background-color: #04b875;
+  border-color: transparent;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.login-section {
+  margin-top: auto;
+}
+
+.login-section form {
+  max-width: 500px;
+  margin-top: 70px;
+}
+
+#login-large-icon {
+  margin: auto;
+}
+
+.active {
+  background-color: #04b875;
+}
+
+@media (max-width: 1150px) {
+  #login-large-icon {
+    width: 400px;
+  }
+}
+
+@media (max-width: 850px) {
+  #login-large-icon {
+    width: 350px;
+  }
+}
+
+@media (max-width: 766px) {
+  .login-section {
+    margin-top: 0px;
+  }
+
+  #login-large-icon {
+    width: 200px;
+    padding-bottom: 50px;
+  }
+
+  .login-section form {
+    max-width: 100%;
+    margin-top: 0px;
+  }
+}

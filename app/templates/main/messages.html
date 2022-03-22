@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}
+    {% if title %}
+        {{ title }}
+    {% else %}
+        Messages
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <section class="messages-section p-2">
+        <div class="side-bar users" style="width: 30%; height: 100vh; float: left; overflow-y: scroll;">
+            {% for user in users %}
+                <div class="list-group list-group-flush border-bottom scrollarea" id="user-panel">
+                    <a href="#" class="list-group-item list-group-item-action p-3 lh-tight" aria-current="true" id="user">
+                        <div class="d-flex w-100 align-items-center justify-content-between" style="height: 15px;">
+                            <strong class="mb-1">{{ user.first_name + " " + user.last_name }}</strong>
+                            <small>Wed</small>
+                        </div>
+                        <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <div style="width: 60%; float: right;">
+            <div class="container-fl">
+                <div class="message-box" style="position: relative;">
+                    <ul id="messages-list">
+
+                    </ul>
+                </div>
+                <div class="text-entry" style="position: relative;">
+                    {{ form.message(id="message-text") }}
+                    {{ form.send(id="send-message") }}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
