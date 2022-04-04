@@ -27,6 +27,43 @@ $(document).ready(function () {
     });
   });
 
+  $(document).ready(function () {
+    $("#register-form").submit(function (e) {
+      e.preventDefault();
+      var csrf_token = $("input[name=csrf_token]").val();
+      $.ajax({
+        type: "POST",
+        url: "/register-user",
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader("X-CSRF-Token", csrf_token);
+        },
+        data: {
+          first_name: $("#first_name").val(),
+          last_name: $("#last_name").val(),
+          username: $("#username").val(),
+          email: $("#email").val(),
+          password: $("#password").val(),
+          confirm_password: $("#confirm_password").val(),
+          csrf_token: csrf_token,
+        },
+        content_type: "application/json",
+      }).done(function (response) {
+        console.log(response);
+      });
+    });
+  });
+
+  $(document).ready(function () {
+    $.ajax({
+      type: "GET",
+      url: "/get_room",
+      content_type: "application/json",
+      success: function (response) {
+        console.log(response);
+      },
+    });
+  });
+
   $("#username").keyup(function (e) {
     var username = $("#username").val();
     if (username.length > 0) {
@@ -56,4 +93,3 @@ $(document).ready(function () {
     });
   });
 });
-

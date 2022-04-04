@@ -3,6 +3,8 @@ from flask_login import login_required, login_user, logout_user, current_user
 from app.auth import auth
 from app.auth.forms import LoginForm, RegisterForm
 from app.models import User
+from app.extensions import db
+from sqlalchemy import or_
 
 # Render login page
 @auth.route("/login")
@@ -24,10 +26,10 @@ def _login_user():
         if form.validate_on_submit():
             if user and User.verify_password_hash(user.password_hash, password):
                 data = dict(message="Login successful!", status="success")
-                login_user(user, remember=False)
+                login_user(user, remember=remember_me)
                 return jsonify(data=data)
             else:
-                data = dict(message="Invalid login!", status="error")
+                data = dict(message="Incorrect username or password!", status="error")
                 for key, val in form.errors.items():
                     form_errors.append(val)
                 return jsonify(data=data)
@@ -45,7 +47,35 @@ def register():
 
 @auth.route("/register-user", methods=["GET", "POST"])
 def _register_user():
-    pass
+    form = RegisterForm()
+    first_name = form.first_name.data
+    last_name = form.last_name.data
+    username = form.username.data
+    email = form.email.data
+    password = form.password.data
+    user = User.query.filter(or_(User.username==username, User.email==email)).first()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            if user is None:
+                new_user = User(first_name=first_name, last_name=last_name, username=username, email=email, password=password)
+                db.session.add(new_user)
+                db.session.commit()
+                data = dict(message="User successfully registered!", status="success")
+                return jsonify(data=data)
+            else:
+                data = dict(message="There is something wrong with your registration.", status="error")
+                return jsonify(data=data)
+        else:
+            form_errors = []
+            for key, value in form.errors.items():
+                form_errors.append(value)
+            return jsonify(data=form_errors)
+
+@auth.route("/get_room", methods=["GET"])
+def _get_room():
+    room = "From query"
+    if request.method == "GET":
+        return jsonify(room=room)
 
 @auth.route('/logout')
 @login_required

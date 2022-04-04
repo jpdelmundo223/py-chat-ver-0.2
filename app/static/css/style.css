@@ -1,3 +1,9 @@
+:root {
+  --black: black;
+  --wash: #e4e6eb;
+  --primary-green: #04b875;
+}
+
 .navbar {
   box-shadow: 0px 2px 10px 0px #888888;
 }
@@ -29,7 +35,34 @@
 }
 
 .active {
-  background-color: #04b875;
+  background-color: var(--primary-green);
+}
+
+textarea {
+  resize: none;
+}
+
+.message {
+  margin: 10px;
+  padding: 10px;
+  list-style-type: none;
+  font-size: 13px;
+}
+
+.message-received {
+  border-radius: 0px 5px 5px 5px;
+  background: var(--wash);
+  color: var(--black);
+  max-width: 500px;
+  height: auto;
+}
+
+.message-sent {
+  border-radius: 5px 5px 0px 5px;
+  background: var(--primary-green);
+  color: white;
+  height: auto;
+  max-width: 500px;
 }
 
 @media (max-width: 1150px) {

@@ -22,8 +22,8 @@ class User(db.Model, UserMixin):
         self.password_hash = generate_password_hash(password)
 
     @staticmethod
-    def verify_password_hash(password: str, password_hash: str) -> bool:
-        return check_password_hash(password, password_hash)
+    def verify_password_hash(password_hash: str, password: str) -> bool:
+        return check_password_hash(password_hash, password)
             
     def check_if_username_already_exists(self):
         username = User.query.filter_by(username=self.username).first()
