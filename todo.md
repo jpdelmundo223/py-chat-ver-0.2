@@ -8,18 +8,14 @@
 - [x] Registration
 - [x] Logout
 
-### Emailing
-
-- [ ] Login
-- [ ] Registration
-
 ### Main features
 
-- [ ] Send/Receive Messages
-- [ ] Invite Notification
-- [ ] Registration
+- [x] Send/Receive Messages
+- [ ] Notifications
+- [ ] File Uploads
+- [ ] Group Messaging
+- [x] Emailing
 
 ### Other features
 
-- [ ] Login
-- [ ] Registration
+- [ ] Sending Emoji
